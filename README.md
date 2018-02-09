@@ -1,2 +1,2 @@
 # animator-editor
-animation editor
+3D animation editor
