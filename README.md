@@ -1,2 +1,2 @@
 # animator-editor
-animator-editor
+animation editor
