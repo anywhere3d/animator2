@@ -16,8 +16,8 @@
 
     var sceneContainerSelector = "#render-container";
     var animatorContainer = $(sceneContainerSelector)[0];
-    var fontPath = "/three/r78/js/fonts/helvetiker_regular.typeface.json";
-    var meshPath = "/animator-editor/HF_MannySkeletonLayer-AvatarsBodyKitv04-v0.1.js"
+    var fontPath = "/animator-editor/three/r78/js/fonts/helvetiker_regular.typeface.json";
+    var meshPath = "/animator-editor/js/HF_MannySkeletonLayer-AvatarsBodyKitv04-v0.1.js"
 
     var container = $(sceneContainerSelector)[0];
     var scene, camera, renderer, controls;
