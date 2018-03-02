@@ -49,8 +49,8 @@
 #right-side-pinbtn:hover, 
 #right-side-pinbtn.pinned { opacity:1; }
 #left-side-chatboard > #left-side-pinbtn.pinned,
-#left-side-pinbtn.pinned  { background-image:url(/icons/pushpin-right-blue32x32.png); }
-#right-side-pinbtn.pinned { background-image:url(/icons/pushpin-left-pink32x32.png); }
+#left-side-pinbtn.pinned  { background-image:url(/animator-editor/icons/pushpin-right-blue32x32.png); }
+#right-side-pinbtn.pinned { background-image:url(/animator-editor/icons/pushpin-left-pink32x32.png); }
 #hover { opacity:1; }
 #left-side-content a:link    {color:#ffffff; text-decoration:initial;}
 #left-side-content a:visited {color:#ffffff; text-decoration:initial;}
