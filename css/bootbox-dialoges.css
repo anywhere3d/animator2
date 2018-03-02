@@ -1,0 +1,29 @@
+/* bootbox-dialoges.css */
+
+.modal-title {
+    font-size:1em;
+}
+
+div.modal-footer > button.btn.btn-default,
+div.modal-footer > button.btn.btn-success,
+div.modal-footer > button.btn.btn-info,
+div.modal-footer > button.btn.btn-warning,
+div.modal-footer > button.btn.btn-danger,
+div.modal-footer > button.btn.btn-primary {
+    letter-spacing:0; 
+    margin-bottom:0;
+    font-family: 'Montserrat', sans-serif;
+    border-radius:3px; 
+    line-height:1.5;
+}
+
+div.modal-body > div.bootbox-body > form.bootbox-form > input.form-control { 
+    min-height:1.5em; 
+}
+
+
+
+
+
+
+

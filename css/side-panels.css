@@ -1,0 +1,78 @@
+#left-side-chatboard, 
+#left-side { left:0px; top:0px; bottom:0px; -webkit-transform:translateX( -340px ); }
+#right-side { right:0px; top:0px; bottom:0px; -webkit-transform: translateX( 340px ); }
+#left-side-chatboard,
+#left-side, 
+#right-side { 
+    color:#eee; position:absolute; 
+    background-color:rgba(0,0,0,0.4); width:400px; 
+    -webkit-transition: -webkit-transform 500ms ease-out;
+}
+/*
+#left-side, 
+#right-side { font-size:16px; line-height:1.4em; }
+*/
+#left-side-chatboard:hover,
+#left-side-chatboard.pinned,
+#left-side:hover, 
+#left-side.pinned,
+#right-side:hover, 
+#right-side.pinned { -webkit-transform: translateX(0); }
+#left-side-content { 
+    position:absolute; right:75px; top:40px; left:30px; bottom:40px; 
+    padding:20px 20px 20px 20px; overflow:hidden; 
+}
+#right-side-content {
+    position:absolute; left:52px; top:40px; right:10px; bottom:40px; 
+    padding: 20px 20px 20px 20px; overflow:auto; 
+}
+#left-side-pinbtn{ 
+    position:absolute; top:20px; right:20px; width:32px; height:32px; 
+    opacity:0.5; border-radius:4px; 
+    background-image:url(/icons/chrome-open-panel32x32.png);
+    background-repeat:no-repeat; background-position:50% 50%; 
+    background-size:contain; cursor:pointer;
+    -webkit-transition:opacity 250ms ease-out; 
+}
+#right-side-pinbtn{ 
+    position: absolute; top: 20px; left: 20px; width: 32px; height: 32px; 
+    opacity:0.5; border-radius: 4px; 
+    background-image: url(/icons/control-panel32x32.png); 
+    background-repeat:no-repeat; background-position: 50% 50%; 
+    background-size:contain; cursor:pointer;
+    -webkit-transition: opacity 250ms ease-out;
+}
+#left-side-chatboard > #left-side-pinbtn:hover,
+#left-side-chatboard > #left-side-pinbtn.pinned,
+#left-side-pinbtn:hover, 
+#left-side-pinbtn.pinned,
+#right-side-pinbtn:hover, 
+#right-side-pinbtn.pinned { opacity:1; }
+#left-side-chatboard > #left-side-pinbtn.pinned,
+#left-side-pinbtn.pinned  { background-image:url(/icons/pushpin-right-blue32x32.png); }
+#right-side-pinbtn.pinned { background-image:url(/icons/pushpin-left-pink32x32.png); }
+#hover { opacity:1; }
+#left-side-content a:link    {color:#ffffff; text-decoration:initial;}
+#left-side-content a:visited {color:#ffffff; text-decoration:initial;}
+#left-side-content a:hover   {color:#00F5FF; text-decoration:initial;}
+#left-side-content a:active  {color:#8eff00; text-decoration:initial;}
+#right-side-content a:link    {color:#ffffff; text-decoration:initial;}
+#right-side-content a:visited {color:#cccccc; text-decoration:initial;}
+#right-side-content a:hover   {color:#00F5FF; text-decoration:initial;}
+#right-side-content a:active  {color:#8eff00; text-decoration:initial;}
+/* 
+a { color:white; text-shadow:0 1px 0 rgba(0,0,0,0.5) } */
+/*
+#left-side h1, 
+#right-side h1 { margin-bottom:10px; font-size:14px;}
+#left-side h2, 
+#right-side h2 { font-size:11px; margin-bottom:5px;}
+#left-side p, 
+#right-side p  { font-size:13px; }
+*/
+.btn-light, 
+.btn-escape, 
+.btn-helper    { width:32px; height:32px; opacity:1; background:rgba(255,255,255,0); }
+.block         { margin-bottom:10px; float:left; width:280px; }
+.button:hover, 
+.button:active { background-position:0px -2px; }
