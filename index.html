@@ -1,0 +1,385 @@
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- meta name="generator" content="Mobirise v3.12.1, mobirise.com" -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/assets/images/anywhere3d-logo-girl-128x128-1.png" type="image/x-icon">
+    <meta name="description" contents="{{description}}">
+    <title>AnimatorEditor v0.2.3</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic&amp;subset=latin">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="/fonts/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-material-design-font/material.css">
+    <link rel="stylesheet" href="/css/et-line-font-plugin/style.css">
+    <link rel="stylesheet" href="/css/tether/tether.min.css">
+    <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/dropdown/style.css">
+    <link rel="stylesheet" href="/css/animate.css/animate.min.css">
+    <link rel="stylesheet" href="/css/socicon/styles.css">
+    <link rel="stylesheet" href="/css/theme/style.css">
+    <link rel="stylesheet" href="/css/mobirise/mbr-additional.css">
+    <link rel="stylesheet" href="/css/messg.css" >
+    <link rel="stylesheet" href="/css/spectrum.css">
+    <link rel="stylesheet" href="/css/side-panels.css">
+    <link rel="stylesheet" href="/css/bootbox-dialoges.css">
+    <link rel="stylesheet" href="/css/colorpicker.css">
+
+
+    <style>
+        body   {font-family: Arial, sans-serif; margin:0; height:100%; background:#000000; overflow:hidden;}
+        canvas {cursor:move; display:block; -ms-touch-action:none; touch-action:none;}
+        .gameinput-joystick {
+            position:absolute; bottom:30px;-ms-touch-action:none; touch-action:none;
+            -webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none; 
+        }
+
+        .gameinput-button__inner { display: table-cell; vertical-align: middle; }
+        .info { color:#FFF; position:absolute; top:10px; left:0px; width:100%; padding:10px; z-index:1001; }
+        .info__icon{ 
+            cursor:pointer; position:absolute; top:10px; left:10px; 
+            width:32px; height:32px; margin-left:0; padding:10px; border-radius:50%;
+            background: rgba( 0, 0, 0, 0.3 );
+        }
+        .info__body{
+          position: absolute; top: 80px; left: -100%;
+          box-sizing: border-box; max-width: 100%;
+          padding: 20px; background: rgba( 0, 0, 0, .75 );
+          -webkit-transition: all .3s;
+             -moz-transition: all .3s;
+              -ms-transition: all .3s;
+               -o-transition: all .3s;
+                  transition: all .3s;
+        }
+        .info__body a{color: #59C8B2;}
+        .info__body p{ font-size: 12px; margin: .5em 0; }
+        .info__instruction{ margin: 0 0 10px; overflow: hidden; }
+        .info__instruction img{ display: block; width: 100%; height: auto; }
+        .info:hover .info__body{ left: 0; }
+    </style>
+
+    <script> debugMode = true; </script>
+    <script src="/js/jquery.min.js"></script>
+
+</head>
+
+
+
+    <!-- HEADER -->
+
+<section id="ext_menu-1e">
+
+    <nav class="navbar navbar-dropdown navbar-fixed-top">
+        <div class="container">
+
+            <div class="mbr-table">
+                <div class="mbr-table-cell">
+                    <div class="navbar-brand">
+                        <a class="navbar-logo"><img src="/assets/images/anywhere3d-logo-girl-1-128x128.png" alt="anywhere3d logo"></a>
+                        <a class="navbar-caption" title="freeland3d.com">animator editor 2</a>
+                    </div>
+
+                </div>
+                
+                <div class="mbr-table-cell">
+                    <ul class="nav-dropdown collapse pull-xs-right nav navbar-nav navbar-toggleable-sm" id="exCollapsingNavbar">
+                        <!-- PROGRESS BAR HERE -->
+                    </ul>
+                </div>
+                
+                <div class="mbr-table-cell">
+
+                    <button class="navbar-toggler pull-xs-right hidden-md-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
+                        <div class="hamburger-icon"></div>
+                    </button>
+
+                    <ul class="nav-dropdown collapse pull-xs-right nav navbar-nav navbar-toggleable-sm" id="exCollapsingNavbar">
+                        <li class="nav-item"><a class="nav-link link">OVERVIEW</a></li>
+                        <li class="nav-item"><a class="nav-link link">FEATURES</a></li>
+                        <li class="nav-item"><a class="nav-link link">HELP</a></li>
+                        <li class="nav-item nav-btn">
+                            <a id="login" class="nav-link btn btn-white btn-white-outline">SIGN IN</a>
+                        </li>
+                    </ul>
+                    <button hidden="" class="navbar-toggler navbar-close" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
+                        <div class="close-icon"></div>
+                    </button>
+
+                </div>
+            </div>
+
+        </div>
+    </nav>
+
+</section>
+
+
+    <!-- SIDE PANELS -->
+
+<style>
+    h1, h2, h3, h4, h5, h6, label, 
+    #left-side, #left-side-content,
+    #right-side, #right-side-content,
+    .btn, .btn-primary, .btn-success,
+    .btn-info, .btn-default,
+    .btn-warning, .btn-danger,
+    .form-group, .form-control {
+        letter-spacing: 0px;
+        font-family:Arial, sans-serif;
+    }
+    .row { margin-left:-0.9375rem; margin-right:0rem; }
+    hr { height:0px; margin-top:1rem; border-top:1px solid #ffffff;}
+    .form-control { min-height:2em; }
+    .btn-primary, .btn-success, .btn-default, .btn-info, 
+    .btn-warning, .btn-danger, .btn-white { padding:0.5rem 1rem; font-size:0.875rem; }
+    .btn-success { background-color:#006900; border-color:#006900; }
+    .btn-success:hover { background-color:#009900; }
+    .detach { 
+        display:inline-block; height:10px; width:10px; vertical-align:middle;
+        background:url("/icons/detach-close-icon.png") 50% 50% / contain no-repeat rgba(255, 255, 255, 0); 
+    }
+    #pin-tip  { position:absolute; max-width:180; max-height:20px; top:5px; left:-170px; text-align:left; overflow:hidden;  z-index:1000;}
+    #left-side-content, #right-side-content { top:20px; bottom:20px; overflow-y:auto; }
+    .nav-btn + .nav-btn { padding-left: 1rem; }
+    .scroll-control-left {left:5px;}
+    .scroll-control-right {right:30px;}
+    .scroll-control-left, .scroll-control-right {
+        position: absolute; width: 30px; height: 30px; text-align: center; background: #4E443C; color: #fff; text-decoration: none;
+        text-shadow: 0 0 1px #000; font: 24px/27px Arial, sans-serif; -webkit-border-radius: 30px; -moz-border-radius: 30px; border-radius: 30px;
+        -webkit-box-shadow: 0 0 4px #F0EFE7; -moz-box-shadow: 0 0 4px #F0EFE7; box-shadow: 0 0 4px #F0EFE7;
+    }
+    .scroll-right{ -webkit-transform: translateX(+100); -webkit-transition: opacity 250ms ease-out;}
+    .scroll-left{ -webkit-transform: translateX(-100); -webkit-transition: opacity 250ms ease-out;}
+</style>
+
+<style>
+    #droplist-bones { position:absolute; left:150px; max-width:140px; font-size:15px; color:#000000; }
+    #bone-label { position:absolute; left:0px; right:0px; top:0px; font-size:1.3em; text-align:center; }
+    .control-container { 
+        left:0px; right:0px; margin-bottom:1px; padding:10px; 
+        color: #ffffff; border:1px solid #ffffff; border-radius:9px; 
+    }
+    .slider-row { padding-left:10px; padding-right:5px; margin-bottom:4px;}
+    .dynamic-label  { position:absolute; width:18%; font-size:11px; padding-top:2px; }
+    .dynamic-slider { width:60%; margin-left:22%; }
+    .dynamic-output { 
+        position:absolute; margin-right:10px; width:18%; 
+        color:#ffffff; border:none; background-color:rgba(255,255,255,0); 
+        font-weight:bold; font-size:1em; text-align:right; font-family:Arial;
+    } 
+    .reset-container {padding:1px; margin-bottom:5px; font-weight:normal; font-size:0.8em; text-align:right; }
+    #hover { opacity:0.5; }
+    .reset-container a span { color:gray !important; }
+	.reset-container a:link {color:#ccf !important; text-decoration:initial;}
+    .reset-container a:visited span {color:#ccf !important; text-decoration:initial;}
+    .reset-container a:hover span  {color:#0f0 !important; text-decoration:initial;}
+    .reset-container a:active span {color:#f00 !important; text-decoration:initial;}
+    #load-skinned-button, #load-pose-button, #load-data-button { color:#0275d8; width:49%; }
+    #load-bvh-button { width:49%; }
+    #export-data, #export-pose { width:49%; margin-left:0px; }
+    #crazy-pose { width:100%; margin-left:0px; }
+    #load-skinned-button:hover, #load-pose-button:hover, #load-data-button:hover, #load-bvh-button:hover,
+    #export-data:hover, #export-pose:hover, #crazy-pose:hover { color:#0275d8 !important; }
+    #animation-loop, #hidden-helpers, #manual-play { float:right; }    
+</style>
+
+<section class="mbr-section mbr-after-navbar" id="msg-box7-z" style="background-color:rgba(0,0,0,1); padding-top:425px; padding-bottom:425px; overflow:hidden;">
+
+    <div id="render-container" class="mbr-overlay" style="opacity:1; background-color:rgb(0,0,0);"></div>
+
+    <div id="left-side" style="top:80px; bottom:0px;">
+        <div id="left-side-pinbtn" title="click this to pin/unpin panel"></div>
+        
+        <div id="left-side-content">
+            <!-- LEFT SIDE PANEL CONTENTS -->
+            
+            <div id="animator-editor-left-panel">
+                <!-- SNIPPETS HERE -->
+                <div class="slider-row" style="font-size:1.3em; margin-bottom:15px;">Import:</div>
+
+                <a id="load-bvh-button" class="btn btn-white btn-white-outline">Import BVH</a>
+                <input type="file" id="load-bvh" style="display:none;">
+
+                <a id="load-skinned-button" class="btn btn-white btn-white-outline">Import Skinned</a>
+                <input type="file" id="load-skinned" style="display:none;">
+
+                <a id="load-data-button" class="btn btn-white btn-white-outline">Import Data</a>
+                <input type="file" id="load-data" style="display:none;">
+
+                <a id="load-pose-button" class="btn btn-white btn-white-outline">Import Pose</a>
+                <input type="file" id="load-pose" style="display:none;">
+                
+                <div class="slider-row" style="font-size:1.3em; margin-top:15px; margin-bottom:15px;">Export:</div>
+                    <a id="export-data" class="btn btn-white btn-white-outline">Export Data</a>
+                    <a id="export-pose" class="btn btn-white btn-white-outline">Export Pose</a>
+                </div>
+
+                <div class="slider-row" style="font-size:1.3em; margin-top:15px; margin-bottom:15px;">Play Options:
+                    <div class="slider-row" style="font-size:0.75em; margin-top:1em; margin-bottom:1em;">Loop:
+                        <input type="checkbox" id="animation-loop" name="loop" checked="true" title="loop">
+                    </div>
+                    <div class="slider-row" style="font-size:0.75em; margin-bottom:1em;">Manual autoplay:
+                        <input type="checkbox" id="manual-play" name="manualplay" checked title="If checked, animation autoplay at mouse buttons pressed down.">
+                    </div>
+                    <div class="slider-row" style="font-size:0.75em; margin-bottom:1em;">Hidden helpers:
+                        <input type="checkbox" id="hidden-helpers" name="hiddenhelpers" checked title="If checked, ground helpers are not visible at play time.">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="right-side" style="top:80px; bottom:0px;">
+        <div id="right-side-pinbtn" title="click this to pin/unpin panel"></div>
+        <div id="right-side-content" style="right:25px;">
+            <!-- RIGHT SIDE PANEL CONTENTS -->
+
+            <div id="animator-editor-right-panel">
+                <div id="bone-holder"></div>
+                <div id="position-holder"></div>
+                <div id="rotation-holder"></div>
+                <div id="scale-holder"></div>
+                <div id="options-holder"></div>
+                <div class="reset-container">
+                    <a id="crazy-pose">Random Pose</a>
+                </div>
+            </div>
+
+        </div>
+    </div>   
+
+</section>
+
+<style>
+    #footer1-1f { background-color: rgb(27,27,27); padding-top:0px; padding-bottom:80px; }
+    #animator-container {
+        position:absolute; top:10px; bottom:5px; left:10px; right:10px; height:50px; display:block;
+        border:1px solid #ffffff;  border-radius:4px; color:#fff; text-align:left; 
+    }
+    #label-timer        { position:absolute; left:10px; bottom:10px; font-size:1.5em; margin-bottom:0px;}
+    #output-timer       { position:absolute; left:60px; bottom:10px; font-size:1.5em; }
+    #status-msgr        { position:absolute; left:10px; top:-25px; color:#fff; font-size:0.7em; display:none; }
+    #animation-buttons  { position:absolute; top:4px; }
+    #animation-play     { position:absolute; left:140px; }
+    #animation-add      { position:absolute; left:200px; }
+    #animation-remove   { position:absolute; top:4px; right:4px; }
+    #timer-container    { position:absolute; left:320px; right:120px; bottom:13px; border:0px solid #ffffff; }
+    #time-container,
+    #keys-container     { position:absolute; left:320px; right:120px; top:-60px; height:50px; border:0px solid #ffff00; z-index:1000; }
+    .keymark            { border:2px solid #ff0; border-radius:4px; /* -webkit-transform:translateX( -16px ); */ }
+    #slider-timer       { width:100%; }
+</style>
+
+<footer class="mbr-small-footer mbr-section mbr-section-nopadding" id="footer1-1f">
+    <div id="animator-container">
+        <label for="slider-timer" id="label-timer">time:</label>
+        <div id="timer-container">
+            <input type="range" min="0" max="3" value="0" class="timerslider" id="slider-timer" step="0.1"> 
+        </div>
+        <div id="time-container" tabindex="-1"></div>
+        <div id="keys-container" tabindex="-1"></div>
+        <strong><output for="slider-timer" class="timeroutput" id="output-timer">0</output></strong>
+        <div id="animation-buttons">
+            <a id="animation-play" class="btn btn-white btn-white-outline">Play</a> 
+            <a id="animation-add" class="btn btn-white btn-white-outline">Add Key</a> 
+        </div>
+        <a id="animation-remove" class="btn btn-white btn-white-outline">Remove Key</a> 
+        <div id="status-msgr">Status messager</div>
+    </div>
+</footer>
+
+<style>
+    .alert-small {width:70%;}
+    .alert-icon {width:50px; height:50px; display:inline-block; margin-right:10px; float:right;}
+    .icon-success {background:url("/icons/anywhere3d-success.png") 50% 50% / contain no-repeat rgba(255, 255, 255, 0);}
+    .icon-cancel {background:url("/icons/anywhere3d-cancel.png") 50% 50% / contain no-repeat rgba(255, 255, 255, 0);}
+    .icon-warning {background:url("/icons/anywhere3d-warning.png") 50% 50% / contain no-repeat rgba(255, 255, 255, 0);}
+    .icon-error {background:url("/icons/anywhere3d-error.png") 50% 50% / contain no-repeat rgba(255, 255, 255, 0);}
+    .icon-logo {background:url("/icons/anywhere3d-girls-logo.png") 50% 50% / contain no-repeat rgba(255, 255, 255, 0);}
+    .icon-bug {background:url("/icons/anywhere3d-bug.png") 50% 50% / contain no-repeat rgba(255, 255, 255, 0);}
+</style>
+
+    <!-- BOOTSTRAP BOOTBOX -->
+
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+<script src="/bootstrap/js/bootbox.min.js"></script>
+<script src="/js/alerts.js"></script>
+<script src="/js/DeviceDetector.js"></script>
+
+<!-- HTML SNIPPETS WITH SCRIPTS -->
+
+<script>
+
+    function importSnippet(url, selector){
+        var d = new $.Deferred();
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                $(selector).append(this.responseText);
+                d.resolve();
+           }
+        };
+        xhr.open("GET", url, true);
+        xhr.send();
+        return d.promise();
+    };
+
+</script>
+
+    <!-- THREEJS -->
+
+<script src="/three/r78/js/three.js"></script>
+<script src="/three/r78/js/controls/EditorControls.js"></script>
+<script src="/three/r78/js/controls/FirstPersonControls.js"></script>
+<script src="/three/r78/js/Detector.js"></script>
+<script src="/three/r78/js/renderers/Projector.js"></script>
+<script src="/js/KeyboardState.js"></script>
+<script src="/js/Animation.js"></script>
+<script src="/js/AnimationHandler.js"></script>
+<script src="/js/KeyFrameAnimation.js"></script>
+<script src="/js/BVHImport.js"></script>
+<script src="/animator-editor/Helpers.js"></script>
+<script src="/animator-editor/SidePanels.js"></script>
+<script src="/js/SceneHelpers.js"></script>
+
+<script src="/animator-editor/BVHParser.js"></script>
+<script src="/animator-editor/BVHLoader.js"></script>
+<script src="/animator-editor/snippets.js"></script>
+<script src="/animator-editor/simpleEvent.js"></script>
+<script src="/animator-editor/AnimationEditorHelpers.js"></script>
+<script src="/animator-editor/keyframes.js"></script>
+<script src="/animator-editor/BCAkeyframes.js"></script>
+<script src="/animator-editor/animatorSkinnedLoader.js"></script>
+<script src="/animator-editor/resets.js"></script>
+<script src="/animator-editor/timelinerController.js"></script>
+<script src="/animator-editor/runtime.js"></script>
+<script src="/animator-editor/eventListeners.js"></script>
+<script src="/animator-editor/imports.js"></script>
+<script src="/animator-editor/exports.js"></script>
+<script src="/animator-editor/randomPose.js"></script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
