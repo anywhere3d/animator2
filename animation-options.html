@@ -1,0 +1,143 @@
+<style>
+    #animation-name { margin-left:22%; font-family:Arial, sans-serif; font-size:12px; width:70%; color:black;}
+</style>
+<div id="animation-options" class="control-container">
+    <div class="slider-row">
+        <label for="slider-dur" class="dynamic-label">Duration&nbsp;<strong>:</strong></label>
+        <input type="range" id="slider-dur" class="dynamic-slider" min="-1" max="1" value="0" step="0.01">
+        <input type="number" id="output-dur" value="3" class="dynamic-output" min="1" max="10" step="0.1">
+    </div>
+    <div class="slider-row">
+        <label for="scl-time-slider" class="dynamic-label">Speed</label>
+        <input type="range" id="slider-timescale"class="dynamic-slider"  min="0" max="2" value="0" step="0.1">
+        <input type="number" id="output-timescale" value="0" class="dynamic-output" step="0.1">
+    </div>
+    <div class="slider-row">
+        <label for="slider-fps" class="dynamic-label">Fps</label>
+        <input type="range" id="slider-fps"class="dynamic-slider"  min="0" max="60" value="25" step="1">
+        <input type="number" id="output-fps" value="25" class="dynamic-output" step="1">
+    </div>
+    <div class="slider-row">
+        <label for="animation-name" class="dynamic-label">Name:<strong></strong></label>
+        <input type="text" id="animation-name" maxLength="128" placeholder="animation name">
+    </div>
+</div>
+
+<script>
+
+    var sliderDurSelector = "#slider-dur";
+    var outputDurSelector = "#output-dur";
+    var sliderTimescaleSelector = "#slider-timescale";
+    var outputTimescaleSelector = "#output-timescale";
+    var sliderFpsSelector = "#slider-fps";
+    var outputFpsSelector = "#output-fps";
+    var animationNameSelector = "#animation-name";
+   
+    var durSlider = $(sliderDurSelector)[0];
+    var durOutput = $(outputDurSelector)[0];
+    var timescaleSlider = $(sliderTimescaleSelector)[0];
+    var timescaleOutput = $(outputTimescaleSelector)[0];
+    var fpsSlider = $(sliderFpsSelector)[0];
+    var fpsOutput = $(outputFpsSelector)[0];
+    var nameAnimField = $(animationNameSelector)[0];
+
+//  Initialize Animation sliders.
+    var durmin, durmax, durstep;
+    durmin = -0.1; durmax = 0.1; durstep = 0.01;
+    initSlider(durSlider, durmin, durmax, durstep);
+
+    $(sliderDurSelector).on("mousedown", function(){ dynamicSliderPressed("dur", true,  0); });
+    $(sliderDurSelector).on("mouseup",   function(){ 
+        dynamicSliderPressed("dur", false, 0); 
+    });
+    $(sliderTimescaleSelector).on("input", function(){ 
+        outputUpdate(outputTimescaleSelector, this.value);
+    });
+    $(sliderFpsSelector).on("input", function(){ outputUpdate(outputFpsSelector, this.value); });
+    $(animationNameSelector).on("change", function(){ submitAnimationName(); });
+
+    function submitNewDurationValue(){
+        var value = Number(animtimerSlider.value);
+        var min = 1;  // sec.
+        var max = 10; // sec.
+    //  var d = Number(durSlider.value);        // number
+    //  d = Number(animtimerSlider.max) + d;    // number
+
+        var d = Number(animtimerSlider.max) + Number(durSlider.value); // number
+        
+        if (d > min && d < max) {
+        
+        //  Submit value to object.
+            animtimerSlider.max = d.toFixed(1); // string
+        //  Return value to output.
+        //  d = Number(animtimerSlider.max);    // number
+            var x = Number(animtimerSlider.max);// number
+            durOutput.value = x;                // number
+            durOutput.style.color = "#fff";
+
+        } else if (d <= min) {
+
+            animtimerSlider.max = min;          // number
+            durOutput.value = min;              // number
+            durOutput.style.color = "#f80";
+            
+        } else if (d >= max) {
+
+            animtimerSlider.max = max;         // number
+            durOutput.value = max;             // number
+            durOutput.style.color = "#f00";
+        }
+
+//  Update keyframes time.
+
+    //  var v = Number(document.getElementById("slider-timer").value);
+        var l = animation.data.hierarchy[0].keys.length;
+        var v = animation.data.length; //  animation.data.hierarchy[0].keys[l - 1].time;
+        var m = Number( animtimerSlider.max );
+        var offset = (m / v );
+
+    //  animation.data.hierarchy[0] last key.
+        animation.data.length = m; // VERY IMPORTANT // (sec.) 
+        animation.data.hierarchy.forEach(function(bone, index){
+            bone.keys[l - 1].time = m;
+        });
+    //  keys between [0] and [last].
+        for ( var i = (l - 2); i > 0; i-- ){
+            var key = animation.data.hierarchy[0].keys[i];
+            var t = key.time * offset;
+        //  key.time = newTime; 
+            animation.data.hierarchy.forEach(function(bone, index){
+                bone.keys[i].time = t;
+            });
+        }
+
+        ensureLooping();  
+        ensureKeysIndexing();
+        displayKeymarks();
+
+        animtimerSlider.value = 0;              // number
+        animtimerSlider.value = value;          // number
+        animtimerOutput.value = value;          // number
+    }
+
+    function submitAnimationName(){
+        animation.data.name = $(animationNameSelector).val();
+    }
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

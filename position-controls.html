@@ -1,0 +1,113 @@
+
+<div id="position-sliders" class="control-container">
+    <div class="slider-row">
+        <label for="slider-pos-x" id="label-pos-x" class="dynamic-label">position&nbsp;<strong>x:</strong></label>
+        <input type="range" id="slider-pos-x" class="dynamic-slider" min="-1" max="1" value="0" step="0.01">
+        <input type="number" id="output-pos-x" class="dynamic-output" value="0" step="1">
+    </div>
+    <div class="slider-row">
+        <label for="slider-pos-y" id="label-pos-y" class="dynamic-label">position&nbsp;<strong>y:</strong></label>
+        <input type="range" id="slider-pos-y" class="dynamic-slider" min="-1" max="1" value="0" step="0.01">
+        <input type="number" id="output-pos-y" class="dynamic-output" value="0" step="1">
+    </div>
+    <div class="slider-row">
+        <label for="slider-pos-z" id="label-pos-z" class="dynamic-label">position&nbsp;<strong>z:</strong></label>
+        <input type="range" id="slider-pos-z" class="dynamic-slider" min="-1" max="1" value="0" step="0.01">
+        <input type="number" id="output-pos-z" class="dynamic-output" value="0" step="1">
+    </div>
+</div>
+
+<div class="reset-container">
+    <a><span id="reset-position">Reset bones position</span></a>
+</div>
+
+
+
+<script>
+
+//  Position sliders.
+    var sliderPosXSelector = "#slider-pos-x";
+    var sliderPosYSelector = "#slider-pos-y";
+    var sliderPosZSelector = "#slider-pos-z";
+    var outputPosXSelector = "#output-pos-x";
+    var outputPosYSelector = "#output-pos-y";
+    var outputPosZSelector = "#output-pos-z";
+
+    var resetPositionSelector = "#reset-position";
+
+    var posSliderX = $(sliderPosXSelector)[0];
+    var posSliderY = $(sliderPosYSelector)[0];
+    var posSliderZ = $(sliderPosZSelector)[0];
+    var posOutputX = $(outputPosXSelector)[0];
+    var posOutputY = $(outputPosYSelector)[0];
+    var posOutputZ = $(outputPosZSelector)[0];
+
+//  Initialize Position sliders.
+    var pmin, pmax, pstep;
+    pmin = -1; pmax = 1; pstep = 0.01; 
+    initSlider(posSliderX, pmin, pmax, pstep);
+    initSlider(posSliderY, pmin, pmax, pstep);
+    initSlider(posSliderZ, pmin, pmax, pstep);
+
+    $(sliderPosXSelector).on("mousedown", function(){ dynamicSliderPressed('pos-x', true,  0); });
+    $(sliderPosYSelector).on("mousedown", function(){ dynamicSliderPressed('pos-y', true,  0); });
+    $(sliderPosZSelector).on("mousedown", function(){ dynamicSliderPressed('pos-z', true,  0); });
+    $(sliderPosXSelector).on("mouseup",   function(){ dynamicSliderPressed('pos-x', false, 0); });
+    $(sliderPosYSelector).on("mouseup",   function(){ dynamicSliderPressed('pos-y', false, 0); });
+    $(sliderPosZSelector).on("mouseup",   function(){ dynamicSliderPressed('pos-z', false, 0); });
+    $(resetPositionSelector).on("click",  function(){ bonesResetPosition(avatar); });
+
+    function submitNewPositionValue(){
+    //  insertNewAnimateDataTimeFrameKey();
+    //  Submit value to object.
+        currentDataBone.keys[currentAnimationKeyIndex].pos[0] += Number( posSliderX.value );     // number
+        currentDataBone.keys[currentAnimationKeyIndex].pos[1] += Number( posSliderY.value );     // number
+        currentDataBone.keys[currentAnimationKeyIndex].pos[2] += Number( posSliderZ.value );     // number
+        
+    //  Play the frame.
+        timescaleSlider.value = 0;
+        animation.play( animation.currentTime );
+        
+    //  Return value to output.
+        posOutputX.value = currentBone.position.x.toFixed(0);     // string
+        posOutputY.value = currentBone.position.y.toFixed(0);     // string
+        posOutputZ.value = currentBone.position.z.toFixed(0);     // string
+    }
+
+    function reverseSubmitPositionValue(){
+    //  Return value to output.
+        if (animation){
+            posOutputX.value = currentBone.position.x.toFixed(0);     // string
+            posOutputY.value = currentBone.position.y.toFixed(0);     // string
+            posOutputZ.value = currentBone.position.z.toFixed(0);     // string
+        }
+    }
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

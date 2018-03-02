@@ -1,0 +1,175 @@
+
+<div id="rotation-sliders" class="control-container">
+    <div class="slider-row">
+        <label for="slider-rot-x" id="label-rot-x" class="dynamic-label">rotation&nbsp;<strong>x:</strong></label>
+        <input type="range" id="slider-rot-x" class="dynamic-slider" min="-1" max="1" value="0" step="0.1">
+        <input type="number" id="output-rot-x" class="dynamic-output" min="-180" max="180" value="0" step="1">
+    </div>
+    <div class="slider-row">
+        <label for="slider-rot-y" id="label-rot-y" class="dynamic-label">rotation&nbsp;<strong>y:</strong></label>
+        <input type="range" id="slider-rot-y" class="dynamic-slider" min="-1" max="1" value="0" step="0.1">
+        <input type="number" id="output-rot-y" class="dynamic-output" min="-180" max="180" value="0" step="1">
+    </div>
+    <div class="slider-row">
+        <label for="slider-rot-z" id="label-rot-z" class="dynamic-label">rotation&nbsp;<strong>z:</strong></label>
+        <input type="range" id="slider-rot-z" class="dynamic-slider" min="-1" max="1" value="0" step="0.1">
+        <input type="number" id="output-rot-z" class="dynamic-output" min="-180" max="180" value="0" step="1">
+    </div>
+</div>
+
+<div class="reset-container">
+    <a><span id="reset-rotation">Reset bones rotation</span></a>
+</div>
+
+
+
+<script>
+
+//  Rotation sliders.
+    var sliderRotXSelector = "#slider-rot-x";
+    var sliderRotYSelector = "#slider-rot-y";
+    var sliderRotZSelector = "#slider-rot-z";
+    var outputRotXSelector = "#output-rot-x";
+    var outputRotYSelector = "#output-rot-y";
+    var outputRotZSelector = "#output-rot-z";
+
+    var resetRotationSelector = "#reset-rotation";
+
+    var rotSliderX = $(sliderRotXSelector)[0];
+    var rotSliderY = $(sliderRotYSelector)[0];
+    var rotSliderZ = $(sliderRotZSelector)[0];
+    var rotOutputX = $(outputRotXSelector)[0];
+    var rotOutputY = $(outputRotYSelector)[0];
+    var rotOutputZ = $(outputRotZSelector)[0];
+
+//  Initialize Static Rotation sliders.
+    var rmin, rmax, rstep;
+    rmin = -180; rmax = 180; rstep = 1;
+    initSlider(rotSliderX, rmin, rmax, rstep);
+    initSlider(rotSliderY, rmin, rmax, rstep);
+    initSlider(rotSliderZ, rmin, rmax, rstep);
+
+    $(sliderRotXSelector).on("mousedown", function(){ staticSliderPressed('rot-x', true,  0); });
+    $(sliderRotYSelector).on("mousedown", function(){ staticSliderPressed('rot-y', true,  0); });
+    $(sliderRotZSelector).on("mousedown", function(){ staticSliderPressed('rot-z', true,  0); });
+    $(sliderRotXSelector).on("mouseup",   function(){ staticSliderPressed('rot-x', false, 0); });
+    $(sliderRotYSelector).on("mouseup",   function(){ staticSliderPressed('rot-y', false, 0); });
+    $(sliderRotZSelector).on("mouseup",   function(){ staticSliderPressed('rot-z', false, 0); });
+    $(resetRotationSelector).on("click",  function(){ bonesResetQuaternion(avatar); });
+
+    function submitNewRotationValue(){
+    //  insertNewAnimateDataTimeFrameKey();
+    //  Get rotation from current bone.
+        var x = currentBone.rotation._x;
+        var y = currentBone.rotation._y;
+        var z = currentBone.rotation._z;
+        
+        x += THREE.Math.degToRad( Number( rotSliderX.value ) );
+        y += THREE.Math.degToRad( Number( rotSliderY.value ) );
+        z += THREE.Math.degToRad( Number( rotSliderZ.value ) );
+        
+        var euler = new THREE.Euler(x, y, z, "XYZ");
+        var quaternion = new THREE.Quaternion();
+        quaternion.setFromEuler( euler );
+        currentDataBone.keys[ currentAnimationKeyIndex ].rot.copy( quaternion );
+    
+    //  Play the frame.
+        timescaleSlider.value = 0;
+        animation.play( animation.currentTime );
+        
+    //  Return value to output.
+        var xrad = currentBone.rotation._x;                      // number rad
+        var yrad = currentBone.rotation._y;                      // number rad
+        var zrad = currentBone.rotation._z;                      // number rad
+        rotOutputX.value = THREE.Math.radToDeg(xrad).toFixed(0); // string degrees
+        rotOutputY.value = THREE.Math.radToDeg(yrad).toFixed(0); // string degrees
+        rotOutputZ.value = THREE.Math.radToDeg(zrad).toFixed(0); // string degrees
+    }
+
+    function reverseSubmitRotationValue(){
+    //  Return value to output.
+        if (animation){
+            var xrad = currentBone.rotation._x;                      // number rad
+            var yrad = currentBone.rotation._y;                      // number rad
+            var zrad = currentBone.rotation._z;                      // number rad
+            rotOutputX.value = THREE.Math.radToDeg(xrad).toFixed(0); // string degrees
+            rotOutputY.value = THREE.Math.radToDeg(yrad).toFixed(0); // string degrees
+            rotOutputZ.value = THREE.Math.radToDeg(zrad).toFixed(0); // string degrees
+        }
+    }
+
+    function submitStaticRotationValue(){
+    //  insertNewAnimateDataTimeFrameKey();
+        var x = THREE.Math.degToRad( Number( rotSliderX.value ) );
+        var y = THREE.Math.degToRad( Number( rotSliderY.value ) );
+        var z = THREE.Math.degToRad( Number( rotSliderZ.value ) );
+        
+        var euler = new THREE.Euler(x, y, z, "XYZ");
+        var quaternion = new THREE.Quaternion();
+        quaternion.setFromEuler( euler );
+        currentDataBone.keys[ currentAnimationKeyIndex ].rot.copy( quaternion );
+
+    //  Play the frame.
+        timescaleSlider.value = 0;
+        animation.play( animation.currentTime );
+        
+    //  Return value to output.
+        var xrad = currentBone.rotation._x;                      // number rad
+        var yrad = currentBone.rotation._y;                      // number rad
+        var zrad = currentBone.rotation._z;                      // number rad
+    //  Always return first rotation y because of quaternion.
+        rotOutputY.value = THREE.Math.radToDeg(yrad).toFixed(0); // string degrees
+        rotOutputX.value = THREE.Math.radToDeg(xrad).toFixed(0); // string degrees
+        rotOutputZ.value = THREE.Math.radToDeg(zrad).toFixed(0); // string degrees
+    }
+    
+    function reverseSubmitStaticRotationValue(){
+    //  Return value to output.
+        if (animation){
+            var xrad = currentBone.rotation._x;                      // number rad
+            var yrad = currentBone.rotation._y;                      // number rad
+            var zrad = currentBone.rotation._z;                      // number rad
+        //  Always return first rotation y because of quaternion.
+            rotOutputY.value = THREE.Math.radToDeg(yrad).toFixed(0); // string degrees
+            rotOutputX.value = THREE.Math.radToDeg(xrad).toFixed(0); // string degrees
+            rotOutputZ.value = THREE.Math.radToDeg(zrad).toFixed(0); // string degrees
+        //  Always return first rotation y because of quaternion.
+            rotSliderY.value = Number(rotOutputY.value);             // number degrees
+            rotSliderX.value = Number(rotOutputX.value);             // number degrees
+            rotSliderZ.value = Number(rotOutputZ.value);             // number degrees
+        }
+    }
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

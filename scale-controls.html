@@ -1,0 +1,177 @@
+
+<div class="control-container">
+    <div class="slider-row">
+        <label for="slider-scale-uniform" class="dynamic-label">Scale <strong>xyz</strong></label>
+        <input type="range" id="slider-scale-uniform"  class="dynamic-slider" min="0.9" max="1.1" value="1"step="0.01">
+        <input type="number" id="output-scale-uniform" class="dynamic-output" value="0"  step="0.1">
+    </div>
+</div>
+
+<div class="reset-container">
+    <a><span id="reset-scale">Reset bones scale</span></a>
+</div>
+
+<div id="scale-sliders" class="control-container">
+    <div class="slider-row">
+        <label for="slider-scl-x" id="label-scl-x" class="dynamic-label">scale&nbsp;<strong>x:</strong></label>
+        <input type="range" id="slider-scl-x" class="dynamic-slider" min="0.9" max="1.1" value="1" step="0.01">
+        <input type="number" id="output-scl-x" class="dynamic-output" value="1" step="1">
+    </div>
+    <div class="slider-row">
+        <label for="slider-scl-y" id="label-scl-y" class="dynamic-label">scale&nbsp;<strong>y:</strong></label>
+        <input type="range" id="slider-scl-y" class="dynamic-slider" min="0.9" max="1.1" value="1" step="0.01">
+        <input type="number" id="output-scl-y" class="dynamic-output" value="1" step="1">
+    </div>
+    <div class="slider-row">
+        <label for="slider-scl-z" id="label-scl-z" class="dynamic-label">scale&nbsp;<strong>z:</strong></label>
+        <input type="range" id="slider-scl-z" class="dynamic-slider" min="0.9" max="1.1" value="1" step="0.01">
+        <input type="number" id="output-scl-z" class="dynamic-output" value="1" step="1">
+    </div>
+</div>
+<style>
+    .helper { width:33%; padding-right:10px; }
+</style>
+<div class="reset-container">
+    <a class="helper"><span id="avatar-helper">Show Avatar</span></a>
+    <a class="helper"><span id="bones-helper">Show Bones</span></a>
+    <a class="helper"><span id="reset-pose">Rest Pose</span></a>
+</div>
+
+
+
+<script>
+
+//  Uniform Scale slider.
+    var sliderScaleUniformSelector = "#slider-scale-uniform";
+    var outputScaleUniformSelector = "#output-scale-uniform";
+    var sclUniformSlider = $(sliderScaleUniformSelector)[0];
+    var sclUniformOutput = $(outputScaleUniformSelector)[0];
+
+//  Scale sliders.
+    var sliderSclXSelector = "#slider-scl-x";
+    var sliderSclYSelector = "#slider-scl-y";
+    var sliderSclZSelector = "#slider-scl-z";
+    var outputSclXSelector = "#output-scl-x";
+    var outputSclYSelector = "#output-scl-y";
+    var outputSclZSelector = "#output-scl-z";
+
+    var resetScaleSelector = "#reset-scale";
+
+    var sclSliderX = $(sliderSclXSelector)[0];
+    var sclSliderY = $(sliderSclYSelector)[0];
+    var sclSliderZ = $(sliderSclZSelector)[0];
+    var sclOutputX = $(outputSclXSelector)[0];
+    var sclOutputY = $(outputSclYSelector)[0];
+    var sclOutputZ = $(outputSclZSelector)[0];
+
+    var avatarHelperSelector = "#avatar-helper";
+    var bonesHelperSelector = "#bones-helper";
+    var resetPoseSelector = "#reset-pose";
+
+//  Initialize Scale sliders.
+    var sclmin, sclmax, sclstep;
+    sclmin = 0.99; sclmax = 1.01; sclstep = 0.001;
+    initSlider(sclSliderX, sclmin, sclmax, sclstep);
+    initSlider(sclSliderY, sclmin, sclmax, sclstep);
+    initSlider(sclSliderZ, sclmin, sclmax, sclstep);
+    initSlider(sclUniformSlider, sclmin, sclmax, sclstep);
+
+    $(sliderScaleUniformSelector).on("mousedown", function(){ dynamicSliderPressed("scale-uniform", true, 1); });
+    $(sliderScaleUniformSelector).on("mouseup",   function(){ dynamicSliderPressed("scale-uniform", false, 1); });
+
+    $(sliderSclXSelector).on("mousedown", function(){ dynamicSliderPressed("scl-x", true,  1); });
+    $(sliderSclYSelector).on("mousedown", function(){ dynamicSliderPressed("scl-y", true,  1); });
+    $(sliderSclZSelector).on("mousedown", function(){ dynamicSliderPressed("scl-z", true,  1); });
+    $(sliderSclXSelector).on("mouseup",   function(){ dynamicSliderPressed("scl-x", false, 1); });
+    $(sliderSclYSelector).on("mouseup",   function(){ dynamicSliderPressed("scl-y", false, 1); });
+    $(sliderSclZSelector).on("mouseup",   function(){ dynamicSliderPressed("scl-z", false, 1); });
+    $(resetScaleSelector).on("click",     function(){ bonesResetScale(avatar); });
+
+    $(avatarHelperSelector).on("click", function(){ showhideHelper(avatar); });
+    $(bonesHelperSelector).on("click", function(){ showhideHelper(armatureHelper); });
+    $(resetPoseSelector).on("click", function(){ avatarRestPose(avatar); });
+
+    function submitNewScaleValue(){
+    //  insertNewAnimateDataTimeFrameKey();
+    //  Submit value to object.
+        var sx = Number( sclSliderX.value ); // number
+        var sy = Number( sclSliderY.value ); // number
+        var sz = Number( sclSliderZ.value ); // number
+        sx = Number(sx.toFixed(3));          // number
+        sy = Number(sy.toFixed(3));          // number
+        sz = Number(sz.toFixed(3));          // number
+        
+    //  currentDataBone.keys[currentAnimationKeyIndex].scl[0]
+        currentDataBone.keys[currentAnimationKeyIndex].scl[0] *= sx;    // number
+        currentDataBone.keys[currentAnimationKeyIndex].scl[1] *= sy;    // number
+        currentDataBone.keys[currentAnimationKeyIndex].scl[2] *= sz;    // number
+        
+    //  Play the frame.
+        timescaleSlider.value = 0;
+        animation.play( animation.currentTime );
+        
+    //  Return value to output.
+        sx = currentBone.scale.x * 100;      // number
+        sy = currentBone.scale.y * 100;      // number
+        sz = currentBone.scale.z * 100;      // number
+        sclOutputX.value = sx.toFixed(1);    // string
+        sclOutputY.value = sy.toFixed(1);    // string
+        sclOutputZ.value = sz.toFixed(1);    // string
+        sclUniformOutput.value = sclOutputY.value;
+    }
+
+    function reverseSubmitScaleValue(){
+    //  Return value to output.
+        if (animation){
+            sx = currentBone.scale.x * 100;      // number
+            sy = currentBone.scale.y * 100;      // number
+            sz = currentBone.scale.z * 100;      // number
+            sclOutputX.value = sx.toFixed(1);    // string
+            sclOutputY.value = sy.toFixed(1);    // string
+            sclOutputZ.value = sz.toFixed(1);    // string
+            sclUniformOutput.value = sclOutputY.value;
+        }
+    }
+
+    function submitUniformScaleValue(){
+    //  insertNewAnimateDataTimeFrameKey();
+    //  Submit value to object.
+        var s = Number( sclUniformSlider.value );
+        //s = s * currentDataBone.keys[currentAnimationKeyIndex].scl[1];
+        s = Number(s.toFixed(3));
+        
+        currentDataBone.keys[currentAnimationKeyIndex].scl[0] *= s; // number
+        currentDataBone.keys[currentAnimationKeyIndex].scl[1] *= s; // number
+        currentDataBone.keys[currentAnimationKeyIndex].scl[2] *= s; // number
+        
+    //  Play the frame.
+        timescaleSlider.value = 0;
+        animation.play( animation.currentTime );
+        
+    //  Return value to output.
+        s = currentBone.scale.y * 100;
+        sclUniformOutput.value = s.toFixed(1); // string
+        sclOutputX.value = s.toFixed(1);       // string
+        sclOutputY.value = s.toFixed(1);       // string
+        sclOutputZ.value = s.toFixed(1);       // string
+    }
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
