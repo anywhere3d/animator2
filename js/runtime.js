@@ -27,11 +27,11 @@
 
     $.when(
 
-        importSnippet("select-bone.html", boneHolderSelector),
-        importSnippet("position-controls.html", positionHolderSelector),
-        importSnippet("rotation-controls.html", rotationHolderSelector),
-        importSnippet("scale-controls.html", scaleHolderSelector),
-        importSnippet("animation-options.html", optionsHolderSelector),
+        importSnippet("/animator-editor/select-bone.html", boneHolderSelector),
+        importSnippet("/animator-editor/position-controls.html", positionHolderSelector),
+        importSnippet("/animator-editor/rotation-controls.html", rotationHolderSelector),
+        importSnippet("/animator-editor/scale-controls.html", scaleHolderSelector),
+        importSnippet("/animator-editor/animation-options.html", optionsHolderSelector),
         
     ).then( function(){
     
@@ -79,7 +79,7 @@
 		skydome = new THREE.Mesh(
 			new THREE.SphereGeometry( far * 0.1, 15, 15 ),
 			new THREE.MeshBasicMaterial({
-				map: loader.load( "/skydomes/skydome.jpg" ),
+				map: loader.load( "/animator-editor/skydomes/skydome.jpg" ),
 				color: 0xffffff,
 				side: THREE.DoubleSide
 			})
