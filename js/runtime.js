@@ -16,8 +16,8 @@
 
     var sceneContainerSelector = "#render-container";
     var animatorContainer = $(sceneContainerSelector)[0];
-    var fontPath = "/animator-editor/three/r78/js/fonts/helvetiker_regular.typeface.json";
-    var meshPath = "/animator-editor/js/HF_MannySkeletonLayer-AvatarsBodyKitv04-v0.1.js"
+    var fontPath = "/animator2/three/r78/js/fonts/helvetiker_regular.typeface.json";
+    var meshPath = "/animator2/js/HF_MannySkeletonLayer-AvatarsBodyKitv04-v0.1.js"
 
     var container = $(sceneContainerSelector)[0];
     var scene, camera, renderer, controls;
@@ -27,11 +27,11 @@
 
     $.when(
 
-        importSnippet("/animator-editor/select-bone.html", boneHolderSelector),
-        importSnippet("/animator-editor/position-controls.html", positionHolderSelector),
-        importSnippet("/animator-editor/rotation-controls.html", rotationHolderSelector),
-        importSnippet("/animator-editor/scale-controls.html", scaleHolderSelector),
-        importSnippet("/animator-editor/animation-options.html", optionsHolderSelector),
+        importSnippet("/animator2/select-bone.html", boneHolderSelector),
+        importSnippet("/animator2/position-controls.html", positionHolderSelector),
+        importSnippet("/animator2/rotation-controls.html", rotationHolderSelector),
+        importSnippet("/animator2/scale-controls.html", scaleHolderSelector),
+        importSnippet("/animator2/animation-options.html", optionsHolderSelector),
         
     ).then( function(){
     
