@@ -79,7 +79,7 @@
 		skydome = new THREE.Mesh(
 			new THREE.SphereGeometry( far * 0.1, 15, 15 ),
 			new THREE.MeshBasicMaterial({
-				map: loader.load( "/animator-editor/skydomes/skydome.jpg" ),
+				map: loader.load( "/animator2/skydomes/skydome.jpg" ),
 				color: 0xffffff,
 				side: THREE.DoubleSide
 			})
