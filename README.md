@@ -1,2 +1,2 @@
 # animator2
-3D animation editor v0.2
+3D animator editor v0.2
